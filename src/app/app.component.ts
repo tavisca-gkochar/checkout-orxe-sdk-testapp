@@ -10,6 +10,7 @@ export class AppComponent implements OnInit {
   title = "test-sdk";
   public sdkResponse;
   public _cartSDK;
+  public selectedAction = "";
   constructor() {
     this._cartSDK = new Cart("");
   }
@@ -21,12 +22,14 @@ export class AppComponent implements OnInit {
   getCart() {
     this._cartSDK.getCart(true).subscribe((resp) => {
       this.sdkResponse = resp;
+      this.selectedAction = "get-cart";
     });
   }
 
   getOrder() {
     this._cartSDK.getOrder(true).subscribe((resp) => {
       this.sdkResponse = resp;
+      this.selectedAction = "get-order";
     });
   }
 }

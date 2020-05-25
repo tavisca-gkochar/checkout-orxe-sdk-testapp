@@ -46,8 +46,8 @@
 <div>
   <h2>SDK Response</h2>
   <div class="sdk-actions">
-    <a class="action-btn" (click)="getCart()">Get Cart</a>
-    <a class="action-btn" (click)="getOrder()">Get Order</a>
+    <a class="action-btn" [ngClass]="{'active': selectedAction == 'get-cart'}" (click)="getCart()">Get Cart</a>
+    <a class="action-btn" [ngClass]="{'active': selectedAction == 'get-order'}" (click)="getOrder()">Get Order</a>
 
   </div>
   <hr>
