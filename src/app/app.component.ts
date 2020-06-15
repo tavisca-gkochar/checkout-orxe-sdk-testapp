@@ -1,5 +1,11 @@
 import { Component, AfterViewInit, OnInit } from "@angular/core";
 import Cart from "../../node_modules/cart/lib/src/index";
+import "@orxe-components/input";
+import { ApiService } from "./api.service";
+
+// Cart URl
+const cartUrl =
+  "https://muag18xj7a.execute-api.us-east-1.amazonaws.com/qa/mock-data/CART_NON_CLP.json";
 
 @Component({
   selector: "app-root",
@@ -11,8 +17,8 @@ export class AppComponent implements OnInit {
   public sdkResponse;
   public _cartSDK;
   public selectedAction = "";
-  constructor() {
-    this._cartSDK = new Cart("");
+  constructor(private service: ApiService) {
+    this._cartSDK = Cart.getInstance(cartUrl);
   }
 
   ngOnInit() {
@@ -20,10 +26,17 @@ export class AppComponent implements OnInit {
   }
 
   getCart() {
-    this._cartSDK.getCart(true).subscribe((resp) => {
-      this.sdkResponse = resp;
-      this.selectedAction = "get-cart";
+    // API call with angular HTTPClient
+    this.service.getCart(cartUrl).subscribe((data) => {
+      this.sdkResponse = data;
     });
+
+    // // API call with angular HTTP SDK
+
+    // this._cartSDK.getCartByCartId(null).subscribe((resp) => {
+    //   this.sdkResponse = resp;
+    //   this.selectedAction = "get-cart";
+    // });
   }
 
   getOrder() {
